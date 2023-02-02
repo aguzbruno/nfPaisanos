@@ -6,7 +6,22 @@ import { useNftStore } from '../store/nftStore';
 
 const SearchBar: React.FC = () => {
     const [search,setSearch] = useState('')
+    const [isMobile,setIsMobile] = useState(false)
     const { setSearchCreator } = useNftStore((state) => state)
+
+    const handleResize = () => {
+        if (window.innerWidth < 1200) {
+            setIsMobile(true)
+        } else {
+            setIsMobile(false)
+        }
+      }
+      
+      // create an event listener
+      useEffect(() => {
+        window.addEventListener("resize", handleResize)
+      })
+
     useEffect(()=>{
         setSearchCreator(search)
     },[search])
@@ -20,8 +35,12 @@ const SearchBar: React.FC = () => {
                     type="text"
                     placeholder="Search here by creator"
                 />
-                {/* <Image className={styles.buttonSearch} src="/searchButton.svg" alt="search-button" width={40} height={40} /> */}
-                <Image className={styles.buttonSearch} src="/searchButton2.svg" alt="search-button" width={24} height={24} />
+                {isMobile ?(
+                    <Image className={styles.buttonSearch} src="/searchButton2.svg" alt="search-button" width={24} height={24} />
+                ):(
+                    <Image className={styles.buttonSearch} src="/searchButton.svg" alt="search-button" width={40} height={40} />
+                )
+                }
             </div>
         </div>)
 };
