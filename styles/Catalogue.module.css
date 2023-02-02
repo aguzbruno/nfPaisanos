@@ -1,0 +1,212 @@
+.catalogueContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 1120px;
+    margin-bottom: 108.5px;
+}
+.catalogue{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.filtersContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 252px;
+    padding-right: 32px;
+    color: #fff;
+    margin-top: 45px;
+}
+.filtersContainer label{
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 12px;
+    color: #B1B5C4;
+    
+}
+.containerResetFilters{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #777E91;
+    padding-top: 28px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+.textResetFilter{
+    margin: 0px;
+    padding-left: 8px;
+    
+}
+.cardsContainer{
+    display: grid;
+    grid-template-columns: repeat(3,256px);
+    justify-content: center;
+    gap: 32px;
+    margin-top: 0px;
+}
+.loadMoreContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;   
+    width: 832px;
+    margin-left: 252px;
+}
+.button{
+    
+    width: 132px;
+    height: 40px;
+    background-color: transparent;
+    color: #FCFCFD;
+    border: 2px solid #777E91;
+    border-radius: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 12px;
+    
+}
+
+
+
+.field{
+    position:relative;  
+    width: 100%;
+}
+.sliderContainer{
+    width: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.valueContainer{
+    margin-bottom: 25px;
+    position: absolute;
+    top: -45px;
+    left: 0px;   
+}
+
+/* LA BARRA DEL SLIDER*/
+.slider{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background:#3772FF;
+    height: 20px;
+    border-radius: 25px;
+    height: 10px;
+    left: 0px;
+    right: 0px;
+    top: calc(50% - 16px/2 + 18px);
+}
+/* EL BOTON DEL SLIDER */
+.slider::-webkit-slider-thumb{
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    border-radius: 7px solid rgb(255,255,255);
+    box-shadow: 2px 8px 13px -3px rgba(116,114,114,0.75);
+    -webkit-box-shadow: 2px 8px 13px -3px rgba(116,114,114,0.75);
+    -moz-box-shadow: 2px 8px 13px -3px rgba(116,114,114,0.75);
+    background: #3772FF;
+    border: 4px solid #FCFCFD;
+    box-shadow: 0px 8px 16px -8px rgba(15, 15, 15, 0.2);
+    border-radius: 24px;
+}
+
+.labelRange{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 4px 8px;
+    gap: 10px;
+    color: black;
+    width: 49px;
+    height: 28px;
+    background: #FCFCFD;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.loader{
+    animation: spin 3s
+        linear infinite;
+}
+
+
+
+
+
+
+@keyframes spin {
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width:1200px){
+    .catalogueContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 311px;
+        margin-bottom: 108.5px;
+
+    }
+    .catalogue{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .sliderContainer{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        
+    }
+    .filtersContainer{
+        padding-right: 0px;
+        width: 100%;
+        margin-top: 0px;
+    }
+    .cardsContainer{
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: repeat(1,311px);
+        width: 100%;
+        margin-top: 32px;
+    }
+    .cardsContainer span{
+        display: none;
+    }
+    .button{
+        width: 100%;
+    }
+    .loadMoreContainer{
+        width: 311px;
+        margin-left: 0px;
+    }
+}

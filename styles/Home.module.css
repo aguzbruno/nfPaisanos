@@ -1,0 +1,14 @@
+.searchFilterContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 446.5px;
+}
+
+@media (max-width:1200px){
+    .searchFilterContainer{
+        justify-content: center;
+        height: 311px;
+    }
+}

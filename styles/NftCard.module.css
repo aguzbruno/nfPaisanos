@@ -1,0 +1,249 @@
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+}
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    font-family: 'Poppins';
+    color: #fff;
+    background-color: #23262F;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 256px;
+    height: 474px;
+    background: #23262F;
+    box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.imgPrincipalNftCard{
+    object-fit: cover;
+    width: 232px;
+    height: 303px;
+    margin-top: 12px;
+    border-radius: 16px;
+}
+.titlePrincipal{
+    margin: 0px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.ethPrice{
+    color: #45B26B;
+    border: 2px solid #45B36B;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    width: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.containerInfoNftCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    margin-top: 20px;
+}
+.containerUsersStock{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.containerBidsCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    margin-top: 12px;
+    margin-bottom: 28px;
+}
+.borderTop{
+    border-top: 1px solid #353945;;
+}
+.bidUsersPerfil{
+    width: 24px;
+    height: 24px;
+}
+.bidUsersContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+.bidUsersContainer img:nth-child(n+2){
+    margin-left: -12px;
+    border: 2px solid #23262F;
+    border-radius: 50%;
+}
+.titleBid{
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 20px;
+    color: #777E91;
+    margin-right: 4px;
+}
+.stock{
+    font-size: 12px;
+    margin: 0px;
+    font-weight: 600;
+}
+.allInfoContainer{
+    width: 232px;
+}
+.highBid{
+    margin: 0px;
+    font-weight: 500;
+    color: #fff;
+    font-size: 12px;
+}
+.typeNft{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 26px;
+    border-radius: 4px;
+    top: 0px;
+    left: 0px;
+    background-color: #45B26B;
+    font-size: 12px;
+    font-weight: 700;
+    transform: translate(25%,100%);
+}
+.placeABidContainer{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    transform: translate(40%,-50%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 134px;
+    height: 40px;
+    background: #3772FF;
+    border: none;
+    color: #fff;
+    border-radius: 90px;
+    gap: 8px;
+}
+.placeABid{
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0px;
+    margin-left: 12px;
+}
+.heartContainer{
+    position: absolute;
+    top: -10px;
+    right: 0px;
+    transform: translate(-25%,100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background: #23262F;
+    border: none;
+    box-shadow: 0px 8px 16px -8px rgba(15, 15, 15, 0.2);
+    border-radius: 32px;
+}
+
+@media (max-width:1200px){
+    .container{
+        width: 311px;
+    }
+  
+    .imgPrincipalNftCard{
+        width: 287px;
+    }
+    .allInfoContainer{
+        width: 287px;
+    }
+    .typeNft{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        padding-left: 8px;
+        padding-right: 8px;
+        height: 26px;
+        border-radius: 4px;
+        top: 0px;
+        left: -20px;
+        background-color: #45B26B;
+        font-size: 12px;
+        font-weight: 700;
+        transform: translate(25%,100%);
+    }
+    .placeABidContainer{
+        position: absolute;
+        bottom: -20px;
+        left: 0px;
+        transform: translate(40%,-50%);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 134px;
+        height: 40px;
+        background: #3772FF;
+        border: none;
+        color: #fff;
+        border-radius: 90px;
+        gap: 8px;
+    }
+    .placeABid{
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0px;
+        margin-left: 12px;
+    }
+    .heartContainer{
+        position: absolute;
+        top: -10px;
+        right: -20px;
+        transform: translate(-25%,100%);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        background: #23262F;
+        border: none;
+        box-shadow: 0px 8px 16px -8px rgba(15, 15, 15, 0.2);
+        border-radius: 32px;
+    }
+    
+
+}

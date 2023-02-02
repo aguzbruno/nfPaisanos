@@ -1,0 +1,86 @@
+.containerFooter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #353945;
+    background-color: transparent;
+    height: auto;
+}
+.footer{
+    height: 90px;
+    padding-bottom: 54px;
+    margin-top: 80px;
+    border-bottom: 1px solid #353945;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 1120px;
+}
+.logoContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0px;
+    justify-content: center;
+    width: 166.4px;
+}
+.logoNfpaisanos{
+    margin-left: 8px;
+    font-size: 24px;
+    color:#fff
+}
+.textFooter{
+    margin: 0px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff;
+}
+.spanFooter{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #777E91;  
+    margin-bottom: 32px;
+    margin-top: 32px;
+}
+@media (max-width:1200px){
+    .containerFooter{
+        background-color: #23262F;
+        height: 317px;
+        border-top: none;
+        align-items:flex-start;
+    }
+    .footer{
+        gap: 32px;
+        margin-top: 64px;
+        padding-bottom: 48px;
+        border: none;
+        align-items: flex-start;
+        width: 375px;
+        
+    }
+    .textFooter{
+        font-size: 16px;
+        width: 150px;
+        height: auto;
+        margin-left: 32px;
+    }
+    .logoContainer{
+        margin-left: 32px;
+    }
+    .spanFooter{
+        padding-top: 25px;
+        margin-bottom: 48px;
+        width: 100%;
+        
+        border-top: 1px solid #353945;
+        text-align: center;
+    }
+}
