@@ -2,6 +2,7 @@
 .dropdown{
     min-width: 15em;
     position: relative;
+    user-select:none;
 }
 .dropdown *{
     box-sizing: border-box;

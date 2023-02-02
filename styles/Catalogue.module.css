@@ -40,6 +40,7 @@
     padding-top: 28px;
     margin-top: 24px;
     cursor: pointer;
+    user-select:none;
 }
 .textResetFilter{
     margin: 0px;
@@ -90,7 +91,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
+    user-select:none;
 }
 
 .valueContainer{

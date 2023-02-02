@@ -1,5 +1,3 @@
-/** @format */
-
 "use client";
 import { Nft } from "../types";
 import NftDetail from "../components/NftDetail/NftDetail";
@@ -49,7 +47,9 @@ const Container: React.FC<Props> = ({ nfts, favoritesNfts, ethPrice }) => {
                     <NftDetail ethPrice={ethPrice} />
                 </article>
             ) : (
-                <div><Loader size={64}/></div>
+                <div>
+                    <Loader size={64} />
+                </div>
             )}
             <div className={styles.searchFilterContainer}>
                 <SearchBar />
