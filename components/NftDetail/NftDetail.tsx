@@ -107,9 +107,9 @@ function Magnifier({
   }
 
 const NftDetail: React.FC<Props> = ({ethPrice }) => {
-    const {selectedFavorite} = useNftStore((state)=> state)
+    const selectedFavorite = useNftStore((state)=> state).selectedFavorite as Nft
     
-    return <div className={styles.nftDetailContainer} >
+    return <div className={styles.nftDetailContainer}>
         <div className={styles.imgPrincipalContainer}>
             {/* <picture><img className={styles.imgPrincipalNftDetail} src={nft.media.image} alt="principal-image-nft"></img></picture> */}
             <Magnifier

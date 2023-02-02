@@ -8,7 +8,7 @@ interface nftStore {
     allNfts: Nft[];
     nftsFilteredAndOrder: Nft[];
     favoritesNfts: Nft[];
-    selectedFavorite: Nft;
+    selectedFavorite?: Nft;
     filters: Filters;
     setAllNfts: (nfts: Nft[]) => void;
     setNftsFilteredAndOrder: (nfts: Nft[]) => void;
@@ -23,38 +23,6 @@ export const useNftStore = create<nftStore>()((set) => ({
     allNfts: [],
     nftsFilteredAndOrder: [],
     favoritesNfts: [],
-    selectedFavorite: {
-        id: 19,
-        instantPrice: "1.00 ETH",
-        highestBid: "0.012 ETH",
-        author: "Martin Russo",
-        authorAvatar:
-            "https://res.cloudinary.com/dvmll0ruo/image/upload/v1657153929/NFPAISANOS/06_mjddoi.png",
-        type: "Art",
-        stock: 1,
-        likes: 30,
-        createdAt: "2022-06-10T11:10:33.000Z",
-        endsAt: "2022-07-06T11:42:33.000Z",
-        media: {
-            id: 13,
-            image: "https://res.cloudinary.com/dvmll0ruo/image/upload/c_scale,w_1000/v1657121532/NFPAISANOS/img_122_s2bk3s.png",
-            image2x:
-                "https://res.cloudinary.com/dvmll0ruo/image/upload/c_scale,w_1500/v1657121532/NFPAISANOS/img_122_s2bk3s.png",
-        },
-        attributes: { id: 13, color: "black", type: "legendary" },
-        bidUsers: [
-            {
-                id: 8,
-                name: "Nicolas Sieiro",
-                avatar: "https://res.cloudinary.com/dvmll0ruo/image/upload/v1657153929/NFPAISANOS/02_nqwu5e.png",
-            },
-            {
-                id: 8,
-                name: "Nicolas Sieiro",
-                avatar: "https://res.cloudinary.com/dvmll0ruo/image/upload/v1657153929/NFPAISANOS/02_nqwu5e.png",
-            },
-        ],
-    },
     filters: {
         likesFilter: "Most liked",
         colorFilter: "All colors",
@@ -100,7 +68,7 @@ export const useNftStore = create<nftStore>()((set) => ({
         set((state) => {
             if (search.length) {
                 const nftsSearchCreator = state.allNfts.filter((element) =>
-                    element.author.includes(search)
+                    element.author.toLowerCase().includes(search.toLowerCase())
                 );
                 return {
                     ...state,
@@ -145,8 +113,9 @@ function orderAndFilter(state: any, filters: any) {
     const nftsFilteredByCategory = filterByCategory(state, filters);
     const nftsFilteredByPrice = filterByPrice(nftsFilteredByCategory, filters);
     const nftsFilteredByColor = filterByColor(nftsFilteredByPrice, filters);
+    const nftsOrderedByDate = orderByDate(nftsFilteredByColor, filters);
 
-    return orderByLikes(nftsFilteredByColor, filters);
+    return orderByLikes(nftsOrderedByDate, filters);
 }
 
 function orderByLikes(nfts: any, filters: any) {
@@ -155,18 +124,16 @@ function orderByLikes(nfts: any, filters: any) {
         orderByLikes = nfts.sort(
             (productA: any, productB: any) =>
                 productB["likes"] - productA["likes"]
-        ); //Menor a mayor para mayor a menor cambiar a por b en la ultima linea dsps de la flecha
+        ); //Menor a mayor
     } else {
         orderByLikes = nfts.sort(
             (productA: any, productB: any) =>
                 productA["likes"] - productB["likes"]
-        ); //Menor a mayor para mayor a menor cambiar a por b en la ultima linea dsps de la flecha
+        ); 
     }
     return orderByLikes;
 }
 function filterByCategory(state: any, filters: any) {
-    console.log("Ordene por categoria");
-    console.log(filters.category);
     if (filters.category === "All") {
         return state.allNfts;
     } else {
@@ -191,11 +158,10 @@ function filterByColor(nfts: any, filters: any) {
         );
     }
 }
-// function orderByDate(nfts:any,filters:any){
-//     if(filters.timeFilter ==='Newest'){
-//         return nfts
-//     }else{
-//         return nfts.filter(
-//             ((element:any)=> (element.attributes.color) === filters.colorFilter.toLowerCase()))
-//         }
-//     }
+function orderByDate(nfts:any,filters:any){
+    const nftsOrderByDate =nfts.sort(
+        (a:any,b:any) => 
+            a['createdAt'] - b['createdAt']
+        )
+    return nftsOrderByDate
+    }

@@ -92,7 +92,8 @@ const Catalogue: React.FC = () => {
 
 
             </div>;
-            {nftsFilteredAndOrder?.length >= 6 ? (
+            {/* Lazy Loading Infinte Scroll */}
+            {nftsFilteredAndOrder?.length > 6 ? (
                 <div className={styles.loadMoreContainer}>
                     <div className={styles.button}>
                         <Image className={styles.loader} src="/loader.svg" alt="loader" width={16} height={16} />

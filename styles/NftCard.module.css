@@ -118,6 +118,12 @@
     color: #fff;
     font-size: 12px;
 }
+.highBidShorter{
+    margin: 0px;
+    font-weight: 500;
+    color: #fff;
+    font-size: 11px;
+}
 .typeNft{
     position: absolute;
     display: flex;

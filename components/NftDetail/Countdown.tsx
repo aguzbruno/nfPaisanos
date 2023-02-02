@@ -4,6 +4,7 @@ import type { Nft } from '../../types';
 import styles from '../../styles/NftDetail.module.css'
 import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
+import Loader from '../Loader';
 
 type Props = {
     date: string;
@@ -63,7 +64,7 @@ const Countdown: React.FC<Props> = ({ date }) => {
                 </span>
             </div>
         </>) : (
-        <p className={styles.auctionEnding} >Auction ended</p>
+        <Loader size={24}/>
     )
 };
 export default Countdown
