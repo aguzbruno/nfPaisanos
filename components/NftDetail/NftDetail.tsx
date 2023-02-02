@@ -6,7 +6,6 @@ import Arrows from './Arrows';
 import BidDetail from './BidDetail';
 import ButtonsDetail from './ButtonsDetail';
 import HeaderDetail from './HeaderDetail';
-import ReactImageMagnify from 'react-image-magnify';
 import { Box } from "theme-ui";
 import React, { useEffect, useState } from "react";
 import { useNftStore } from '../../store/nftStore';
