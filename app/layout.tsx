@@ -10,7 +10,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang="es">
       <head>
       <title>NFPaisanos | NFT Marketplace </title>
       <meta name='description' content='Marketplace of Nfts'/>

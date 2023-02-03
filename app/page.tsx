@@ -5,9 +5,10 @@ import Container from '../components/Container';
 
 const Home = async ({ }) => {
   const apiKey = await getApiKey();
-  const nfts = await getNfts(apiKey);
-  const favoritesNfts = await getFavoritesNfts(apiKey);
-  const ethPrice = await getEthPrice(apiKey);
+  // const nfts = await getNfts(apiKey);
+  // const favoritesNfts = await getFavoritesNfts(apiKey);
+  // const ethPrice = await getEthPrice(apiKey);
+  const [nfts, favoritesNfts, ethPrice] = await Promise.all([getNfts(apiKey),getFavoritesNfts(apiKey),getEthPrice(apiKey)])
 
   
 

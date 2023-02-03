@@ -3,8 +3,10 @@
 import { create } from "zustand";
 import { Nft, Filters } from "../types";
 import { stringEthToNumber } from "../utils";
+type OrderFn = (nfts: Nft[], filters: Filters)=> Nft[]
 
-interface nftStore {
+
+interface NftStore {
     allNfts: Nft[];
     nftsFilteredAndOrder: Nft[];
     favoritesNfts: Nft[];
@@ -14,12 +16,12 @@ interface nftStore {
     setNftsFilteredAndOrder: (nfts: Nft[]) => void;
     setFavorites: (nfts: Nft[]) => void;
     setSelectedFavorite: (nft: Nft) => void;
-    setFilters: (filters: Filters) => void;
+    setFilters: (filters: Filters,orderFn:OrderFn) => void;
     setSearchCreator: (search: string) => void;
     resetFilters: () => void;
 }
 
-export const useNftStore = create<nftStore>()((set) => ({
+export const useNftStore = create<NftStore>()((set) => ({
     allNfts: [],
     nftsFilteredAndOrder: [],
     favoritesNfts: [],
@@ -82,11 +84,11 @@ export const useNftStore = create<nftStore>()((set) => ({
             }
         });
     },
-    setFilters: (filters: Filters) => {
+    setFilters: (filters: Filters,orderFn:OrderFn) => {
         set((state) => {
             return {
                 ...state,
-                nftsFilteredAndOrder: orderAndFilter(state, filters),
+                nftsFilteredAndOrder: orderAndFilter(state, filters,orderFn),
                 filters: filters,
             };
         });
@@ -107,33 +109,45 @@ export const useNftStore = create<nftStore>()((set) => ({
     },
 }));
 
-function orderAndFilter(state: any, filters: any) {
-    console.log("esto llego a la maestra");
-    console.log(filters);
+function orderAndFilter(state: NftStore, filters: Filters,orderFn:OrderFn) {
     const nftsFilteredByCategory = filterByCategory(state, filters);
     const nftsFilteredByPrice = filterByPrice(nftsFilteredByCategory, filters);
     const nftsFilteredByColor = filterByColor(nftsFilteredByPrice, filters);
-    const nftsOrderedByDate = orderByDate(nftsFilteredByColor, filters);
+    // const nftsOrderedByDate = orderByDate(nftsFilteredByColor, filters);
 
-    return orderByLikes(nftsOrderedByDate, filters);
+    return orderFn(nftsFilteredByColor, filters);
 }
 
-function orderByLikes(nfts: any, filters: any) {
+export function orderByLikes(nfts: Nft[], filters: Filters) {
     let orderByLikes;
     if (filters.likesFilter === "Most liked") {
         orderByLikes = nfts.sort(
-            (productA: any, productB: any) =>
-                productB["likes"] - productA["likes"]
+            (productA, productB) => productB["likes"] - productA["likes"]
         ); //Menor a mayor
     } else {
         orderByLikes = nfts.sort(
-            (productA: any, productB: any) =>
+            (productA: Nft, productB: Nft) =>
                 productA["likes"] - productB["likes"]
-        ); 
+        );
     }
     return orderByLikes;
 }
-function filterByCategory(state: any, filters: any) {
+export function orderByDate(nfts: Nft[], filters: Filters): Nft[] {
+    if (filters.timeFilter === "Newest") {
+        return nfts.sort(function (a, b) {
+            return (
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime()
+            );
+        });
+    }
+    return nfts.sort(function (a, b) {
+        return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+    });
+}
+function filterByCategory(state: NftStore, filters: Filters) {
     if (filters.category === "All") {
         return state.allNfts;
     } else {
@@ -142,13 +156,13 @@ function filterByCategory(state: any, filters: any) {
         );
     }
 }
-function filterByPrice(nfts: any, filters: any) {
+function filterByPrice(nfts: Nft[], filters: Filters) {
     return nfts.filter(
         (element: any) =>
             Number(stringEthToNumber(element.instantPrice)) > filters.priceRange
     );
 }
-function filterByColor(nfts: any, filters: any) {
+function filterByColor(nfts: Nft[], filters: Filters) {
     if (filters.colorFilter === "All colors") {
         return nfts;
     } else {
@@ -158,10 +172,4 @@ function filterByColor(nfts: any, filters: any) {
         );
     }
 }
-function orderByDate(nfts:any,filters:any){
-    const nftsOrderByDate =nfts.sort(
-        (a:any,b:any) => 
-            a['createdAt'] - b['createdAt']
-        )
-    return nftsOrderByDate
-    }
+

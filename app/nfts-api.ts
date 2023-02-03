@@ -1,6 +1,6 @@
 import type { Nft } from "../types";
 
-export const getApiKey = async () => {
+export const getApiKey = async ():Promise<string> => {
     const apiKey = await fetch(
         "http://challenges.us-east-1.elasticbeanstalk.com/login",
         {
@@ -12,7 +12,7 @@ export const getApiKey = async () => {
         }
     )
     const key = await apiKey.json()
-    return key.key
+    return key.key as string
 };
 export const getFavoritesNfts = async (apiKey:string) => {
     const favoritesNfts:Nft[] = await fetch('http://challenges.us-east-1.elasticbeanstalk.com/nfpaisanos/popular',{

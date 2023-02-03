@@ -5,7 +5,7 @@ import styles from "../styles/Catalogue.module.css";
 import Select from "./Select";
 import { useState } from "react";
 import Image from "next/image";
-import { useNftStore } from "../store/nftStore";
+import { orderByDate, orderByLikes, useNftStore } from "../store/nftStore";
 import { useEffect } from "react";
 
 const Catalogue: React.FC = () => {
@@ -24,11 +24,9 @@ const Catalogue: React.FC = () => {
 
     function handleChangeColors(selected: string) {
         setSelectedColor(selected);
-        console.log(`Seleccionamos ${selected}`);
     }
     function handleChangeLikes(selected: string) {
         setSelectedLiked(selected);
-        console.log(`Seleccionamos ${selected}`);
     }
     function handlePriceRange(e: any) {
         setPriceRange(e.target.value);
@@ -53,7 +51,7 @@ const Catalogue: React.FC = () => {
             priceRange: Number(priceRange),
         };
         console.log(filtersChanged);
-        setFilters(filtersChanged);
+        setFilters(filtersChanged,orderByDate);
     }, [selectedColor, selectedLiked, priceRange]);
 
     return (

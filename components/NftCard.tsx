@@ -11,7 +11,6 @@ type Props = {
 const NftCard: React.FC<Props> = ({ nft }) => {
     const [isHover, setIsHover] = useState(false);
     function handleHover(condition: boolean) {
-        console.log(condition);
         setIsHover(condition);
     }
     return (

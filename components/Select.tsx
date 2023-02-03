@@ -7,7 +7,6 @@ const Select: React.FC<any> = ({ handle, options, selected }) => {
     const [select, setSelect] = useState(true);
     function handleSelected(option: string) {
         setSelect(!select);
-        console.log(`Seleccionamos ${option} en selected`);
         handle(option);
     }
     return (

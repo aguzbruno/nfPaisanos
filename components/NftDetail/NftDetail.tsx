@@ -113,14 +113,14 @@ const NftDetail: React.FC<Props> = ({ ethPrice }) => {
     return (
         <div className={styles.nftDetailContainer}>
             <div className={styles.imgPrincipalContainer}>
-                <picture><img className={styles.imgPrincipalNftDetail} src={selectedFavorite.media.image} alt="principal-image-nft"></img></picture>
+                <Image className={styles.imgPrincipalNftDetail} src={selectedFavorite.media.image}  width={640} height={800} alt="principal-image-nft"/>
                 {/* <Magnifier
                     imgSrc={selectedFavorite.media.image}
                     imgWidth={1280}
                     imgHeight={1600}
                     magnifierRadius={100}
                 /> */}
-                <div className={styles.hoverToZoom}>
+                {/* <div className={styles.hoverToZoom}>
                     Hover to zoom
                     <Image
                         src="/zoom.svg"
@@ -128,7 +128,7 @@ const NftDetail: React.FC<Props> = ({ ethPrice }) => {
                         height={18}
                         alt="zoom-image"
                     />
-                </div>
+                </div> */}
             </div>
             <div className={styles.infoNftDetailContainer}>
                 <p className={styles.titlePrincipal}>the creator network</p>

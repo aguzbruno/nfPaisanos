@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "../styles/FilterBar.module.css";
 import Image from "next/image";
 import Select from "./Select";
-import { useNftStore } from "../store/nftStore";
+import { orderByDate, useNftStore } from "../store/nftStore";
 import { useEffect } from "react";
 
 const FilterBar: React.FC = () => {
@@ -21,14 +21,22 @@ const FilterBar: React.FC = () => {
         const filtersChanged = {
             ...filters,
             category: item.value,
-            timeFilter: "Newest",
+            timeFilter: selectedTimeFilter,
         };
         setSelectedCategory(item.value);
-        setFilters(filtersChanged);
+        setFilters(filtersChanged,orderByDate);
     }
+
     function handleChangeTimeFilter(selected: string) {
+        const filtersChanged = {
+            ...filters,
+            category: selectedCategory,
+            timeFilter: selected,
+        };
         setSelectedTimeFilter(selected);
+        setFilters(filtersChanged,orderByDate);
     }
+    
     useEffect(() => {
         setSelectedCategory(filters.category);
         setSelectedTimeFilter(filters.timeFilter);
