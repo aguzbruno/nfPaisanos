@@ -1,5 +1,4 @@
 "use client";
-import type { Nft, Filters } from "../types";
 import NftCard from "./NftCard";
 import styles from "../styles/Catalogue.module.css";
 import Select from "./Select";
@@ -7,10 +6,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { orderByDate, orderByLikes, useNftStore } from "../store/nftStore";
 import { useEffect } from "react";
+import Loader from "./Loader";
 
 const Catalogue: React.FC = () => {
     const {
-        setFavorites,
         setFilters,
         resetFilters,
         nftsFilteredAndOrder,
@@ -18,6 +17,7 @@ const Catalogue: React.FC = () => {
     } = useNftStore((state) => state);
     const [selectedColor, setSelectedColor] = useState("All colors");
     const [selectedLiked, setSelectedLiked] = useState("Most liked");
+    const [isLoading,setIsLoading] = useState(true);
     const [priceRange, setPriceRange] = useState(0);
     const likesOptions = ["Most liked", "Least liked"];
     const colorOptions = ["All colors", "Black", "Orange", "Pink", "Purple"];
@@ -42,7 +42,13 @@ const Catalogue: React.FC = () => {
         setSelectedLiked(filters.likesFilter);
         setPriceRange(filters.priceRange);
     }, [filters]);
-
+    useEffect(()=>{
+        if(isLoading){
+            {setTimeout(()=>{
+                setIsLoading(false)
+            },200)}
+        }
+    },[])
     useEffect(() => {
         const filtersChanged = {
             ...filters,
@@ -50,7 +56,6 @@ const Catalogue: React.FC = () => {
             colorFilter: selectedColor,
             priceRange: Number(priceRange),
         };
-        console.log(filtersChanged);
         setFilters(filtersChanged,orderByDate);
     }, [selectedColor, selectedLiked, priceRange]);
 
@@ -143,10 +148,16 @@ const Catalogue: React.FC = () => {
                         nftsFilteredAndOrder.map((nft, i) => {
                             return <NftCard nft={nft} key={`${nft.id}+${i}`} />;
                         })
-                    ) : (
+                    ) : ( isLoading ? (
+                    <>
+                    <Loader size={60} />
+                   
+                    </>
+                    ):(
                         <p style={{ color: "#fff" }}>
                             No hay resultados para esta busqueda
                         </p>
+                        )
                     )}
                 </div>
             </div>

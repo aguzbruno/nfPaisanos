@@ -9,12 +9,7 @@ const Home = async ({ }) => {
   // const favoritesNfts = await getFavoritesNfts(apiKey);
   // const ethPrice = await getEthPrice(apiKey);
   const [nfts, favoritesNfts, ethPrice] = await Promise.all([getNfts(apiKey),getFavoritesNfts(apiKey),getEthPrice(apiKey)])
-
-  
-
-  console.log( nfts)
   return (
-
     <main >
       <Header />
       <Container nfts={nfts} favoritesNfts = {favoritesNfts} ethPrice ={ethPrice}/>
