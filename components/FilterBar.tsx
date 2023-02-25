@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import { useState } from "react";
 import styles from "../styles/FilterBar.module.css";
@@ -8,6 +10,7 @@ import { useEffect } from "react";
 
 const FilterBar: React.FC = () => {
     const { setFilters, filters } = useNftStore((state) => state);
+
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [selectedTimeFilter, setSelectedTimeFilter] = useState("Newest");
     const optionsTime = ["Newest", "Older"];
@@ -17,26 +20,17 @@ const FilterBar: React.FC = () => {
         { value: "Photography" },
     ];
 
-    function handleChange(item: any) {
+    function handleFilterBar(selectedValue: string, filterToChange: string) {
         const filtersChanged = {
             ...filters,
-            category: item.value,
-            timeFilter: selectedTimeFilter,
+            [filterToChange]: selectedValue,
         };
-        setSelectedCategory(item.value);
-        setFilters(filtersChanged,orderByDate);
+        if (filterToChange === "category") {
+            setSelectedCategory(selectedValue);
+        } else setSelectedTimeFilter(selectedValue);
+        setFilters(filtersChanged, orderByDate);
     }
 
-    function handleChangeTimeFilter(selected: string) {
-        const filtersChanged = {
-            ...filters,
-            category: selectedCategory,
-            timeFilter: selected,
-        };
-        setSelectedTimeFilter(selected);
-        setFilters(filtersChanged,orderByDate);
-    }
-    
     useEffect(() => {
         setSelectedCategory(filters.category);
         setSelectedTimeFilter(filters.timeFilter);
@@ -46,28 +40,28 @@ const FilterBar: React.FC = () => {
         <div className={styles.filterBarContainer}>
             <div className={styles.filterBar}>
                 <Select
-                    handle={handleChangeTimeFilter}
+                    onChangeFunction={handleFilterBar}
                     options={optionsTime}
                     selected={selectedTimeFilter}
+                    nameOfSelect={'timeFilter'}
                 />
                 <div className={styles.radios}>
-                    {radioOptions.map((item: any, i: any) => {
+                    {radioOptions.map((selected: any, i: any) => {
                         return (
                             <div
                                 key={i}
                                 onClick={() => {
-                                    handleChange(item);
+                                    handleFilterBar(selected.value, "category");
                                 }}
                                 className={
                                     styles.radio +
                                     " " +
-                                    (selectedCategory === item.value
+                                    (selectedCategory === selected.value
                                         ? styles.active
                                         : "")
                                 }
                             >
-                                {" "}
-                                {item.value}
+                                {selected.value}
                             </div>
                         );
                     })}

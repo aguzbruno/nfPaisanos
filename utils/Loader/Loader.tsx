@@ -1,4 +1,4 @@
-import styles from "../styles/Catalogue.module.css";
+import styles from "../../styles/Catalogue.module.css";
 import Image from "next/image";
 
 type Props = {

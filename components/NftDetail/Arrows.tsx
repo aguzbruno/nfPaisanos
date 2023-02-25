@@ -11,24 +11,11 @@ export default function Arrows() {
     );
     const selectedFavorite = useNftStore((state) => state.selectedFavorite);
 
-    function handleArrow(side: string) {
-        if (side === "right") {
-            if (indexOfFavorite + 1 < favoritesNfts.length) {
-                setIndexOfFavorite(indexOfFavorite + 1);
-                setSelectedFavorite(favoritesNfts[indexOfFavorite + 1]);
-            } else {
-                setSelectedFavorite(favoritesNfts[0]);
-                setIndexOfFavorite(0);
-            }
-        }
-        if (side === "left") {
-            if (indexOfFavorite - 1 >= 0) {
-                setIndexOfFavorite(indexOfFavorite - 1);
-                setSelectedFavorite(favoritesNfts[indexOfFavorite - 1]);
-            } else {
-                setSelectedFavorite(favoritesNfts[favoritesNfts.length - 1]);
-                setIndexOfFavorite(favoritesNfts.length - 1);
-            }
+    function handleArrow(number:number) {
+        const nextIndex = indexOfFavorite + number
+        if((number > 0 && nextIndex <favoritesNfts.length) || (number<0 && nextIndex>=0)){
+            setIndexOfFavorite(nextIndex);
+            setSelectedFavorite(favoritesNfts[nextIndex]);
         }
     }
 
@@ -36,7 +23,7 @@ export default function Arrows() {
         <div className={styles.arrowContainer}>
             <Image
                 onClick={() => {
-                    handleArrow("left");
+                    handleArrow(-1);
                 }}
                 style={{ cursor: "pointer" }}
                 src="/arrow.svg"
@@ -47,7 +34,7 @@ export default function Arrows() {
             <div className={styles.rightArrowCircle}>
                 <Image
                     onClick={() => {
-                        handleArrow("right");
+                        handleArrow(1);
                     }}
                     style={{ rotate: "180deg", cursor: "pointer" }}
                     src="/arrow.svg"

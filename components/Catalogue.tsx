@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import NftCard from "./NftCard";
 import styles from "../styles/Catalogue.module.css";
@@ -6,58 +8,58 @@ import { useState } from "react";
 import Image from "next/image";
 import { orderByDate, orderByLikes, useNftStore } from "../store/nftStore";
 import { useEffect } from "react";
-import Loader from "./Loader";
-
+import Loader from "../utils/Loader/Loader";
+import NoResults from "../utils/NoResults/NoResults";
 const Catalogue: React.FC = () => {
-    const {
-        setFilters,
-        resetFilters,
-        nftsFilteredAndOrder,
-        filters,
-    } = useNftStore((state) => state);
-    const [selectedColor, setSelectedColor] = useState("All colors");
-    const [selectedLiked, setSelectedLiked] = useState("Most liked");
-    const [isLoading,setIsLoading] = useState(true);
-    const [priceRange, setPriceRange] = useState(0);
+    const { setFilters, resetFilters, nftsFilteredAndOrder, filters } =
+        useNftStore((state) => state);
+    const [isLoading, setIsLoading] = useState(true);
+    const [filtersAndOrder, setFiltersAndOrder] = useState({
+        colorFilter: "All colors",
+        likesFilter: "Most liked",
+        priceRange: 0,
+    });
     const likesOptions = ["Most liked", "Least liked"];
     const colorOptions = ["All colors", "Black", "Orange", "Pink", "Purple"];
 
-    function handleChangeColors(selected: string) {
-        setSelectedColor(selected);
-    }
-    function handleChangeLikes(selected: string) {
-        setSelectedLiked(selected);
-    }
-    function handlePriceRange(e: any) {
-        setPriceRange(e.target.value);
-    }
-    function handleResetFilters() {
-        setSelectedColor("All colors");
-        setSelectedLiked("Most liked");
-        setPriceRange(0);
-        resetFilters();
-    }
-    useEffect(() => {
-        setSelectedColor(filters.colorFilter);
-        setSelectedLiked(filters.likesFilter);
-        setPriceRange(filters.priceRange);
-    }, [filters]);
-    useEffect(()=>{
-        if(isLoading){
-            {setTimeout(()=>{
-                setIsLoading(false)
-            },200)}
-        }
-    },[])
-    useEffect(() => {
+
+    function handleFilterAndOrders(
+        selectedValue: string,
+        filterToChange: string
+    ) {
         const filtersChanged = {
             ...filters,
-            likesFilter: selectedLiked,
-            colorFilter: selectedColor,
-            priceRange: Number(priceRange),
+            [filterToChange]: selectedValue,
         };
-        setFilters(filtersChanged,orderByDate);
-    }, [selectedColor, selectedLiked, priceRange]);
+        setFiltersAndOrder({
+            ...filtersAndOrder,
+            [filterToChange]: selectedValue,
+        });
+        setFilters(filtersChanged, orderByDate);
+    }
+
+    function handleResetFilters() {
+        const filtersReset = {
+            ...filters,
+            colorFilter: "All colors",
+            likesFilter: "Most liked",
+            priceRange: 0,
+        };
+
+        setFiltersAndOrder(filtersReset);
+        setFilters(filtersReset, orderByDate);
+        resetFilters();
+    }
+
+    useEffect(() => {
+        if (isLoading) {
+            {
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 200);
+            }
+        }
+    }, []);
 
     return (
         <div className={styles.catalogueContainer}>
@@ -76,13 +78,16 @@ const Catalogue: React.FC = () => {
                                 max="10"
                                 step="0.001"
                                 onChange={(e) => {
-                                    handlePriceRange(e);
+                                    handleFilterAndOrders(
+                                        e.target.value,
+                                        "priceRange"
+                                    );
                                 }}
-                                value={priceRange}
+                                value={filtersAndOrder.priceRange}
                             />
                             <div className={styles.valueContainer}>
                                 <span className={styles.labelRange}>
-                                    {priceRange}
+                                    {filtersAndOrder.priceRange}
                                     <Image
                                         style={{
                                             position: "absolute",
@@ -113,15 +118,17 @@ const Catalogue: React.FC = () => {
                     </div>
                     <label>LIKES</label>
                     <Select
-                        handle={handleChangeLikes}
+                        onChangeFunction={handleFilterAndOrders}
                         options={likesOptions}
-                        selected={selectedLiked}
+                        selected={filtersAndOrder.likesFilter}
+                        nameOfSelect={"likesFilter"}
                     />
                     <label>OPEN</label>
                     <Select
-                        handle={handleChangeColors}
+                        onChangeFunction={handleFilterAndOrders}
                         options={colorOptions}
-                        selected={selectedColor}
+                        selected={filtersAndOrder.colorFilter}
+                        nameOfSelect={"colorFilter"}
                     />
                     <div className={styles.containerResetFilters}>
                         <Image
@@ -144,20 +151,16 @@ const Catalogue: React.FC = () => {
                     </div>
                 </div>
                 <div className={styles.cardsContainer}>
-                    {nftsFilteredAndOrder.length > 0 ? (
+                    {nftsFilteredAndOrder.length ? (
                         nftsFilteredAndOrder.map((nft, i) => {
                             return <NftCard nft={nft} key={`${nft.id}+${i}`} />;
                         })
-                    ) : ( isLoading ? (
-                    <>
-                    <Loader size={60} />
-                   
-                    </>
-                    ):(
-                        <p style={{ color: "#fff" }}>
-                            No hay resultados para esta busqueda
-                        </p>
-                        )
+                    ) : isLoading ? (
+                        <>
+                            <Loader size={60} />
+                        </>
+                    ) : (
+                        <NoResults />
                     )}
                 </div>
             </div>

@@ -3,11 +3,19 @@ import styles from "../styles/Select.module.css";
 import Image from "next/image";
 import { useState } from "react";
 
-const Select: React.FC<any> = ({ handle, options, selected }) => {
+interface Props{
+    onChangeFunction: any,
+    options:string[],
+    selected:string,
+    nameOfSelect:string
+}
+
+const Select: React.FC<Props> = ({ onChangeFunction, options, selected,nameOfSelect }) => {
+
     const [select, setSelect] = useState(true);
     function handleSelected(option: string) {
         setSelect(!select);
-        handle(option);
+        onChangeFunction(option,nameOfSelect);
     }
     return (
         <div className={styles.dropdown}>

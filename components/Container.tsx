@@ -4,7 +4,7 @@ import NftDetail from "../components/NftDetail/NftDetail";
 import Catalogue from "../components/Catalogue";
 import SearchBar from "../components/SearchBar";
 import FilterBar from "../components/FilterBar";
-import Loader from "./Loader";
+import Loader from "../utils/Loader/Loader";
 import styles from "../styles/Home.module.css";
 import { useNftStore } from "../store/nftStore";
 import { useEffect } from "react";
@@ -24,7 +24,7 @@ const Container: React.FC<Props> = ({ nfts, favoritesNfts, ethPrice }) => {
     } = useNftStore((state) => state);
 
     useEffect(() => {
-        if (!allNfts[0]) {
+        if (!allNfts.length) {
             console.log(nfts);
             setAllNfts(nfts);
             setNftsFilteredAndOrder(nfts);

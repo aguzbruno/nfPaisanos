@@ -28,7 +28,7 @@ const SearchBar: React.FC = () => {
 
     return (
         <div className={styles.searchBarContainer}>
-            <div className={styles.searchBar}>
+            <form className={styles.searchBar}>
                 <input
                     onChange={(e) => {
                         setSearch(e.target.value);
@@ -54,7 +54,7 @@ const SearchBar: React.FC = () => {
                         height={40}
                     />
                 )}
-            </div>
+            </form>
         </div>
     );
 };

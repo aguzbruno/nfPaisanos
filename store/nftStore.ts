@@ -147,6 +147,8 @@ export function orderByDate(nfts: Nft[], filters: Filters): Nft[] {
         );
     });
 }
+
+
 function filterByCategory(state: NftStore, filters: Filters) {
     if (filters.category === "All") {
         return state.allNfts;

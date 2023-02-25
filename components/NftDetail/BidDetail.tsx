@@ -2,29 +2,18 @@ import type { Nft } from "../../types";
 import styles from "../../styles/NftDetail.module.css";
 import Image from "next/image";
 import Countdown from "./Countdown";
+import { parseStringToEth } from "../../utils/parseStringToEth";
 
 type Props = {
     selectedFavorite: Nft;
     ethPrice: string;
 };
 
-function changeUsaToArg(number: string) {
-    let realNumber = "";
-    for (let i = 0; i < number.length; i++) {
-        if (number[i] === ",") {
-            realNumber = realNumber + "";
-        } else if (number[i] === ".") {
-            return Number(realNumber);
-        } else {
-            realNumber = realNumber + number[i];
-        }
-    }
-    return Number(realNumber);
-}
+
 
 const BidDetail: React.FC<Props> = ({ selectedFavorite, ethPrice }) => {
     const ethPriceOfNft = (
-        changeUsaToArg(ethPrice) *
+        parseStringToEth(ethPrice) *
         Number(selectedFavorite.highestBid.slice(0, 5))
     ).toFixed(2);
 
