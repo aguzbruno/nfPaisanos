@@ -16,3 +16,6 @@ NftCard = Corresponde al componente de cada Nft mostrado en el catalogo
 NavBar = Corresponde al componente de NavBar
 Select = Corresponde al componente de Select
 Footer = Corresponde al componente del Footer
+
+
+URL Proyecto: https://nfpaisanos-git-main-aguzbruno.vercel.app/
